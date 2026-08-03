@@ -115,17 +115,14 @@ st.markdown("""
     Generator ini bersifat Personal Use Only. Tidak boleh disebarkan/dijual ulang tanpa izin 🙏.<br>
     OPEN PUBLIC AFFILIATE LEWAT LYNK, Search : Aesthetic Food Photo Generator - GT03
     </p>
-""", unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)st.markdown("""
+    st.markdown("---")
+st.markdown(
+    """
     <p style="text-align: center; font-size: 0.85rem; color: #888888; line-height: 1.5;">
-    Dibuat oleh : <b>Ghina Tresna</b><br>
-    Generator ini bersifat Personal Use Only. Tidak boleh disebarkan tanpa izin 🙏.<br>
+    Dibuat oleh <b>Ghina Tresna</b><br>
+    Generator ini bersifat Personal Use Only. Tidak boleh disebarkan/dijual ulang tanpa izin 🙏.<br>
     OPEN PUBLIC AFFILIATE LEWAT LYNK : Aesthetic Food Photo Generator - GT03
     </p>
-""", unsafe_allow_html=True)st.markdown("""
-    <p style="text-align: center; font-size: 0.85rem; color: #888888; line-height: 1.5;">
-    Dibuat oleh : <b>Ghina Tresna</b><br>
-    Generator ini bersifat Personal Use Only. Tidak boleh disebarkan tanpa izin 🙏.<br>
-    OPEN PUBLIC AFFILIATE LEWAT LYNK : Aesthetic Food Photo Generator - GT03
-    </p>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True,
+)
