@@ -1,5 +1,3 @@
-
-)
 import streamlit as st
 import time
 
@@ -61,6 +59,7 @@ st.markdown(f'<p style="font-size: 0.9rem; color: #666;">Konsep terpilih: <b>{le
 
 extra_props = st.text_input("Properti", placeholder="Contoh: daun mint", label_visibility="collapsed")
 custom_generate = st.button("🎨 Hasilkan Konsep Custom")
+
 st.markdown('<p class="box-header" style="margin-top: 2rem;">3. Hasil Visual</p>', unsafe_allow_html=True)
 
 if auto_generate:
@@ -106,6 +105,7 @@ elif custom_generate:
         st.warning("⚠️ Silakan pilih setidaknya satu konsep custom.")
 else:
     st.info("Hasil akan muncul di sini setelah Anda mengunggah foto dan menekan tombol 'Hasilkan'.")
+
 st.markdown("---")
 st.markdown("""
 <p style="text-align: center; font-size: 0.85rem; color: #888888; line-height: 1.5;">
@@ -114,3 +114,4 @@ HARAM menyebarkan link ini tanpa izin 🚫
 </p>
 """, unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
+
