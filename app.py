@@ -1,5 +1,4 @@
 
-
 import streamlit as st
 import time
 
@@ -12,6 +11,7 @@ st.markdown("""
 .stApp { background-color: #FAF6F0; }
 .main-title { font-size: 2.2rem; font-weight: bold; color: #1E3F20; text-align: center; margin-bottom: 0px; }
 .sub-title { font-size: 1rem; color: #8C6D53; text-align: center; margin-bottom: 25px; }
+.greeting-box { background-color: #FFF2EE; padding: 15px 20px; border-radius: 12px; border: 1px solid #FFD1C7; color: #7A4F42; font-size: 0.95rem; text-align: center; margin-bottom: 20px; line-height: 1.5; }
 .card { background-color: #FFFFFF; padding: 20px; border-radius: 15px; border: 1.5px solid #F5D6CB; margin-bottom: 20px; }
 </style>
 """, unsafe_allow_html=True)
@@ -19,6 +19,14 @@ st.markdown("""
 # Header
 st.markdown('<p class="main-title">Nhira Studio AI ✨</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">PRODUCT PHOTO GENERATOR<br>Ubah foto produk Anda menjadi 8 konsep foto estetik dalam 1 klik dengan AI ✨</p>', unsafe_allow_html=True)
+
+# Sapaan Hangat & Islami
+st.markdown("""
+<div class="greeting-box">
+Hai <i>Sisters</i> shalihah! Siapa bilang cari cuan harus selalu ninggalin rumah? Dari pojokan kamar sambil dasteran pun, kita tetap bisa jemput rezeki Allah. Semangat ya buat yang lagi ikhtiar hari ini!<br><br>
+Eh tapi ingat, jangan keasyikan edit video sampai lupa jemuran di luar udah mateng terpanggang matahari ya, hehe. Selamat berkarya dan ikhtiar cari rezeki halal, semoga jadi tambahan rezeki yang barokah buat kita semua. Aamiin. 🤲✨
+</div>
+""", unsafe_allow_html=True)
 
 # 1. Langkah 1: Upload Foto
 st.markdown('<div class="card">', unsafe_allow_html=True)
