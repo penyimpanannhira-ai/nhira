@@ -4,19 +4,19 @@ import time
 # Konfigurasi Halaman Web
 st.set_page_config(page_title="Nhira Studio AI", page_icon="✨", layout="centered")
 
-# Desain Tampilan Estetik & Background Custom CSS
+# CSS Kustom: Background Gambar & Pembersihan Total Kotak Kosong
 st.markdown("""
 <style>
-/* Mengatur Background Utama Aplikasi */
+/* Mengatur Background Halaman dengan Gambar Anda */
 .stApp {
-    background-color: #FAF6F0;
-    background-image: linear-gradient(rgba(250, 246, 240, 0.85), rgba(250, 246, 240, 0.85)), 
+    background-image: linear-gradient(rgba(250, 246, 240, 0.92), rgba(250, 246, 240, 0.92)), 
                       url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
+/* Judul Utama */
 .main-title { 
     font-size: 2.2rem; 
     font-weight: bold; 
@@ -32,25 +32,27 @@ st.markdown("""
     margin-bottom: 20px; 
 }
 
+/* Kotak Sapaan Hangat */
 .greeting-box { 
-    background-color: #FFF2EE; 
+    background-color: rgba(255, 242, 238, 0.95); 
     padding: 15px 20px; 
     border-radius: 12px; 
     border: 1.5px solid #FFD1C7; 
     color: #7A4F42; 
     font-size: 0.95rem; 
     text-align: center; 
-    margin-bottom: 20px; 
+    margin-bottom: 25px; 
     line-height: 1.5; 
 }
 
-.card { 
-    background-color: rgba(255, 255, 255, 0.92); 
+/* Kartu Konten Utama (Tanpa Ada Kotak Lonjong Kosong Tambahan) */
+.content-card { 
+    background-color: rgba(255, 255, 255, 0.95); 
     padding: 20px; 
     border-radius: 15px; 
     border: 1.5px solid #F5D6CB; 
-    margin-bottom: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    margin-bottom: 25px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -67,25 +69,24 @@ Eh tapi ingat, jangan keasyikan edit video sampai lupa jemuran di luar udah mate
 </div>
 """, unsafe_allow_html=True)
 
-# 1. Langkah 1: Upload Foto Produk / Makanan
-st.markdown('<div class="card">', unsafe_allow_html=True)
+# --- LANGKAH 1: UPLOAD FOTO ---
+st.markdown('<div class="content-card">', unsafe_allow_html=True)
 st.markdown("### 1. Upload Foto Produk / Makanan")
 uploaded_file = st.file_uploader("Format: JPG, PNG, WebP", type=["jpg", "png", "jpeg", "webp"])
 
 if uploaded_file is not None:
     st.success("✅ Foto berhasil diunggah!")
     st.image(uploaded_file, caption="Preview Foto Anda", width=220)
-
 st.markdown('</div>', unsafe_allow_html=True)
 
-# 2. Langkah 2: Pilih Rasio / Ukuran Foto
-st.markdown('<div class="card">', unsafe_allow_html=True)
+# --- LANGKAH 2: PILIH RASIO ---
+st.markdown('<div class="content-card">', unsafe_allow_html=True)
 st.markdown("### 2. Pilih Rasio / Ukuran Foto")
 rasio = st.radio("Pilih ukuran:", ["1:1 (Square)", "3:4 (Portrait)", "9:16 (Story)"], horizontal=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# 3. Langkah 3: Kolom Instruksi Edit / Ubah Background & Food Photography
-st.markdown('<div class="card">', unsafe_allow_html=True)
+# --- LANGKAH 3: INSTRUKSI EDIT & FOOD PHOTOGRAPHY ---
+st.markdown('<div class="content-card">', unsafe_allow_html=True)
 st.markdown("### 3. Instruksi Edit & Food Photography")
 instruksi_edit = st.text_area(
     "Tuliskan perintah ubah background atau konsep foto (Contoh: Ganti background jadi meja kayu estetik untuk food photography)",
@@ -93,8 +94,8 @@ instruksi_edit = st.text_area(
 )
 st.markdown('</div>', unsafe_allow_html=True)
 
-# 4. Langkah 4: Pilih Gaya Foto (12 Pilihan Custom Style)
-st.markdown('<div class="card">', unsafe_allow_html=True)
+# --- LANGKAH 4: PILIH GAYA FOTO ---
+st.markdown('<div class="content-card">', unsafe_allow_html=True)
 st.markdown("### 4. Pilih Gaya Foto (Custom Style)")
 st.write("Centang gaya yang diinginkan (Maksimal 8):")
 
@@ -114,10 +115,9 @@ with col3:
     g6 = st.checkbox("POV Hand Interaction")
     g9 = st.checkbox("Product Close-up")
     g12 = st.checkbox("Creative Levitation")
-
 st.markdown('</div>', unsafe_allow_html=True)
 
-# 5. Tombol Utama & Animasi Jam Pasir (Posisi Paling Bawah)
+# --- TOMBOL UTAMA & JAM PASIR ---
 if st.button("✨ Hasilkan Konsep Foto Produk Otomatis", use_container_width=True):
     if uploaded_file is not None:
         with st.status("⏳ Nhira Studio AI sedang memproses foto...", expanded=True) as status:
@@ -132,7 +132,7 @@ if st.button("✨ Hasilkan Konsep Foto Produk Otomatis", use_container_width=Tru
     else:
         st.error("⚠️ Silakan upload foto produk/makanan terlebih dahulu di Langkah 1!")
 
-# Footer Penutup Bawah
+# Footer Bawah
 st.markdown("""
 <div style="background-color: rgba(255, 242, 238, 0.95); padding: 12px; border-radius: 10px; border: 1px solid #FFD1C7; text-align: center; color: #7A4F42; font-size: 0.85rem; margin-top: 30px;">
 Skill hari ini, cuan untuk nanti. Terus bertumbuh!<br>
