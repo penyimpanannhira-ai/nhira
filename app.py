@@ -59,8 +59,14 @@ st.markdown("### A. FOTO PRODUK <span style='font-size:0.8rem; color:#8C6D53;'>(
 
 col_p1, col_p2 = st.columns([1, 1])
 with col_p1:
-    st.markdown("##### 1. Unggah Foto Produk")
-    prod_file = st.file_uploader("Format: PNG, JPG, atau WEBP", type=["jpg", "png", "jpeg", "webp"], key="prod")
+    st.markdown("##### 1. Masukkan Link Foto Produk (URL)")
+    prod_url = st.text_input("Tempel link gambar online di sini (Contoh: https://...)", key="url_prod")
+    
+    if prod_url:
+        try:
+            st.image(prod_url, caption="Preview Foto Produk Anda", width=200)
+        except:
+            st.error("⚠️ Gagal memuat gambar dari link tersebut. Pastikan link langsung ke file gambar.")
     
     st.markdown("##### Rasio Aspek (Opsional)")
     prod_ratio = st.radio("Pilih rasio produk:", ["Default", "1:1", "3:4", "9:16", "16:9"], horizontal=True, key="r_prod")
@@ -71,36 +77,35 @@ with col_p1:
 with col_p2:
     st.markdown("##### 2. Pilih Gaya Foto Produk <span style='font-size:0.75rem; color:#8C6D53;'>(Pilih maksimal 12)</span>", unsafe_allow_html=True)
     
-    # 12 Pilihan Gaya Produk dalam bentuk grid checkbox
     gp1, gp2, gp3, gp4 = st.columns(4)
     with gp1:
-        p1 = st.checkbox("1. Minimalist")
-        p5 = st.checkbox("5. Floating")
-        p9 = st.checkbox("9. Clean White")
+        p1 = st.checkbox("1. Minimalist", key="p1")
+        p5 = st.checkbox("5. Floating", key="p5")
+        p9 = st.checkbox("9. Clean White", key="p9")
     with gp2:
-        p2 = st.checkbox("2. Luxury Marble")
-        p6 = st.checkbox("6. Beauty")
-        p10 = st.checkbox("10. Soft Pastel")
+        p2 = st.checkbox("2. Luxury Marble", key="p2")
+        p6 = st.checkbox("6. Beauty", key="p6")
+        p10 = st.checkbox("10. Soft Pastel", key="p10")
     with gp3:
-        p3 = st.checkbox("3. Premium")
-        p7 = st.checkbox("7. Glass Ref.")
-        p11 = st.checkbox("11. Lifestyle")
+        p3 = st.checkbox("3. Premium", key="p3")
+        p7 = st.checkbox("7. Glass Ref.", key="p7")
+        p11 = st.checkbox("11. Lifestyle", key="p11")
     with gp4:
-        p4 = st.checkbox("4. Catalog")
-        p8 = st.checkbox("8. Luxury Dark")
-        p12 = st.checkbox("12. Creative Adv")
+        p4 = st.checkbox("4. Catalog", key="p4")
+        p8 = st.checkbox("8. Luxury Dark", key="p8")
+        p12 = st.checkbox("12. Creative Adv", key="p12")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
 # Tombol Eksekusi Produk
 if st.button("✨ Hasilkan Foto Produk", use_container_width=True, key="btn_prod"):
-    if prod_file is not None:
+    if prod_url:
         with st.status("⏳ Memproses Foto Produk...", expanded=True) as status:
             time.sleep(1.5)
             status.update(label="🎉 Selesai!", state="complete", expanded=False)
         st.success("🎉 Foto produk berhasil diproses!")
     else:
-        st.error("⚠️ Silakan unggah foto produk terlebih dahulu di Bagian A nomor 1!")
+        st.error("⚠️ Silakan masukkan link foto produk terlebih dahulu di Bagian A nomor 1!")
 
 
 # ==========================================
@@ -111,9 +116,15 @@ st.markdown("### B. FOOD / KULINER <span style='font-size:0.8rem; color:#8C6D53;
 
 col_f1, col_f2 = st.columns([1, 1])
 with col_f1:
-    st.markdown("##### 1. Unggah Foto Makanan")
-    food_file = st.file_uploader("Format: PNG, JPG, atau WEBP", type=["jpg", "png", "jpeg", "webp"], key="food")
+    st.markdown("##### 1. Masukkan Link Foto Makanan (URL)")
+    food_url = st.text_input("Tempel link gambar makanan online di sini", key="url_food")
     
+    if food_url:
+        try:
+            st.image(food_url, caption="Preview Foto Makanan Anda", width=200)
+        except:
+            st.error("⚠️ Gagal memuat gambar dari link tersebut.")
+            
     st.markdown("##### Rasio Aspek (Opsional)")
     food_ratio = st.radio("Pilih rasio makanan:", ["Default", "1:1", "3:4", "9:16", "16:9"], horizontal=True, key="r_food")
     
@@ -123,7 +134,6 @@ with col_f1:
 with col_f2:
     st.markdown("##### 2. Pilih Gaya Foto Food Photography <span style='font-size:0.75rem; color:#8C6D53;'>(Pilih maksimal 12)</span>", unsafe_allow_html=True)
     
-    # 12 Pilihan Gaya Kuliner
     gf1, gf2, gf3, gf4 = st.columns(4)
     with gf1:
         f1 = st.checkbox("1. Premium Cafe", key="f1")
@@ -146,13 +156,13 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 # Tombol Eksekusi Food
 if st.button("✨ Hasilkan Foto Food", use_container_width=True, key="btn_food"):
-    if food_file is not None:
+    if food_url:
         with st.status("⏳ Memproses Foto Kuliner...", expanded=True) as status:
             time.sleep(1.5)
             status.update(label="🎉 Selesai!", state="complete", expanded=False)
         st.success("🎉 Foto kuliner berhasil diproses!")
     else:
-        st.error("⚠️ Silakan unggah foto makanan terlebih dahulu di Bagian B nomor 1!")
+        st.error("⚠️ Silakan masukkan link foto makanan terlebih dahulu di Bagian B nomor 1!")
 
 
 # ==========================================
@@ -162,7 +172,7 @@ st.markdown('<div class="section-box">', unsafe_allow_html=True)
 st.markdown("### C. HASIL VISUAL", unsafe_allow_html=True)
 st.markdown("<p style='font-size:0.9rem; color:#8C6D53;'>Hasil & konsep visual siap digunakan.</p>", unsafe_allow_html=True)
 
-st.info("🖼️ Hasil akan muncul di sini. Unggah gambar dan pilih gaya, lalu klik tombol 'Hasilkan' untuk memulai.")
+st.info("🖼️ Hasil akan muncul di sini. Masukkan link gambar dan pilih gaya, lalu klik tombol 'Hasilkan' untuk memulai.")
 st.markdown("</div>", unsafe_allow_html=True)
 
 
