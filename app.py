@@ -1,84 +1,166 @@
+
 import streamlit as st
 import time
 
-# Konfigurasi Halaman Web
-st.set_page_config(page_title="Nhira Studio AI", page_icon="✨", layout="centered")
+st.set_page_config(page_title="Nhira Studio AI", layout="centered")
 
-# Desain Tampilan Estetik (CSS Kustom)
 st.markdown("""
 <style>
-.stApp { background-color: #FAF6F0; }
-.main-title { font-size: 2.2rem; font-weight: bold; color: #1E3F20; text-align: center; margin-bottom: 0px; }
-.sub-title { font-size: 1.0rem; color: #8C6D53; text-align: center; margin-bottom: 25px; }
-.greeting-box { background-color: #FFF2EE; padding: 15px 20px; border-radius: 12px; border: 1.5px solid #FFD1C7; color: #7A4F42; font-size: 0.95rem; text-align: center; margin-bottom: 25px; line-height: 1.5; }
-.card { background-color: #FFFFFF; padding: 20px; border-radius: 15px; border: 1.5px solid #F5D6CB; margin-bottom: 20px; }
+.stApp {
+    background-image: url("background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.main-container { 
+    background-color: rgba(255, 255, 255, 0.92); 
+    padding: 1.5rem; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    margin-bottom: 2rem; 
+}
+.big-title { 
+    font-size: 1.8rem; 
+    font-weight: 800; 
+    color: #4A3B32; 
+    text-align: center; 
+    margin-bottom: 0.1rem; 
+}
+.sub-title { 
+    font-size: 0.9rem; 
+    color: #8C7A6B; 
+    text-align: center; 
+    margin-bottom: 1rem; 
+}
+.greeting-box { 
+    background: linear-gradient(135deg, #FFF3E6 0%, #FFE5D0 100%); 
+    border: 1px solid #F5CDBC; 
+    padding: 1rem; 
+    border-radius: 12px; 
+    margin-bottom: 1rem; 
+    font-size: 0.85rem; 
+    color: #5C4A3D; 
+    line-height: 1.5; 
+    text-align: center; 
+    font-weight: 600; 
+}
+.box-header { 
+    font-size: 1rem; 
+    font-weight: 700; 
+    color: #5C4A3D; 
+    margin-top: 1.2rem; 
+    margin-bottom: 0.4rem; 
+}
+div.stButton > button { 
+    background-color: #D98262; 
+    color: white; 
+    font-weight: 600; 
+    border-radius: 10px; 
+    border: none; 
+    width: 100%; 
+    padding: 0.5rem; 
+}
+div.stButton > button:hover { 
+    background-color: #C16D4C; 
+    color: white; 
+}
+.closing-box { 
+    background-color: #FAF8F5; 
+    border: 1px dashed #D9C3B0; 
+    padding: 1rem; 
+    border-radius: 10px; 
+    text-align: center; 
+    margin-top: 1.5rem; 
+    font-size: 0.85rem; 
+    color: #7A6958; 
+    line-height: 1.5; 
+}
 </style>
 """, unsafe_allow_html=True)
 
-# Header Utama
-st.markdown('<p class="main-title">Nhira Studio AI ✨</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">PRODUCT PHOTO GENERATOR<br>Ubah foto produk Anda menjadi 8 konsep foto estetik dalam 1 klik dengan AI ✨</p>', unsafe_allow_html=True)
+st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
-# Sapaan Hangat & Islami
+st.markdown('<p class="big-title">Nhira Studio AI ✨</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Ubah foto produk Anda menjadi estetik dalam 1 klik dengan AI ✨</p>', unsafe_allow_html=True)
+
 st.markdown("""
 <div class="greeting-box">
-Hai <i>Sisters</i> shalihah! Siapa bilang cari cuan harus selalu ninggalin rumah? Dari pojokan kamar sambil dasteran pun, kita tetap bisa jemput rezeki Allah. Semangat ya buat yang lagi ikhtiar hari ini!<br><br>
-Eh tapi ingat, jangan keasyikan edit video sampai lupa jemuran di luar udah mateng terpanggang matahari ya, hehe. Selamat berkarya dan ikhtiar cari rezeki halal, semoga jadi tambahan rezeki yang barokah buat kita semua. Aamiin. 🤲✨
+    Assalamu'alaikum warohmatulohi wabarokatuh<br>
+    <span style="font-size: 0.8rem; font-weight: normal; color: #7A6353; display: block; margin-top: 4px;">
+    Semoga harimu penuh berkah dan rezeki halal berlimpah. Aamiin. ✨
+    </span>
 </div>
 """, unsafe_allow_html=True)
 
-# 1. Langkah 1: Upload Foto Produk
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.markdown("### 1. Upload Foto Produk")
-uploaded_file = st.file_uploader("Format yang didukung: JPG, PNG, WebP", type=["jpg", "png", "jpeg", "webp"])
+st.markdown('<p class="box-header">1. Upload Foto Produk</p>', unsafe_allow_html=True)
+uploaded_file = st.file_uploader(
+    "Upload Foto", 
+    type=['png', 'jpg', 'jpeg', 'webp'], 
+    label_visibility="collapsed"
+)
 
-if uploaded_file is not None:
-    st.success("✅ Foto berhasil diunggah!")
-    st.image(uploaded_file, caption="Preview Foto Anda", width=220)
+st.markdown('<p class="box-header">2. Pilih Rasio / Ukuran Foto</p>', unsafe_allow_html=True)
+aspect_ratio = st.radio(
+    "Pilih ukuran:", 
+    ("1:1 (Square)", "3:4 (Portrait)", "9:16 (Story)"), 
+    horizontal=True, 
+    label_visibility="collapsed"
+)
 
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('<p class="box-header">3. Instruksi Edit Foto Produk</p>', unsafe_allow_html=True)
+edit_instruction = st.text_input(
+    "Instruksi Edit", 
+    placeholder="Contoh: tingkatkan pencahayaan...", 
+    label_visibility="collapsed"
+)
 
-# 2. Langkah 2: Pilih Rasio / Ukuran Foto
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.markdown("### 2. Pilih Rasio / Ukuran Foto")
-rasio = st.radio("Pilih ukuran:", ["1:1 (Square)", "3:4 (Portrait)", "9:16 (Story)"], horizontal=True)
-st.markdown('</div>', unsafe_allow_html=True)
-
-# 3. Langkah 3: Pilih Gaya Foto (Custom Style Grid - 12 Pilihan)
-st.markdown('<div class="card">', unsafe_allow_html=True)
-st.markdown("### 3. Pilih Gaya Foto (Custom Style)")
-st.write("Centang gaya yang diinginkan (Maksimal 8):")
-
+st.markdown('<p class="box-header">4. Pilih Gaya Foto (12 Pilihan)</p>', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
-with col1:
-    g1 = st.checkbox("Minimalist Studio")
-    g4 = st.checkbox("Dark & Moody")
-    g7 = st.checkbox("Flat Lay Top View")
-    g10 = st.checkbox("Color Pop")
-with col2:
-    g2 = st.checkbox("Luxury Marble")
-    g5 = st.checkbox("Rustic Natural")
-    g8 = st.checkbox("Lifestyle Real Scene")
-    g11 = st.checkbox("Monochrome Clean")
-with col3:
-    g3 = st.checkbox("Soft Natural Light")
-    g6 = st.checkbox("POV Hand Interaction")
-    g9 = st.checkbox("Product Close-up")
-    g12 = st.checkbox("Creative Levitation")
+styles = [
+    "Minimalist Studio", "Luxury Marble", "Soft Natural Light",
+    "Dark & Moody", "Rustic Natural", "POV Hand Interaction",
+    "Flat Lay Top View", "Lifestyle Real Scene", "Product Close-up",
+    "Color Pop", "Monochrome Clean", "Creative Levitation"
+]
+
+selected_styles = []
+for i, style in enumerate(styles):
+    target_col = col1 if i % 3 == 0 else (col2 if i % 3 == 1 else col3)
+    with target_col:
+        if st.checkbox(style, key=f"style_{i}"):
+            selected_styles.append(style)
+
+st.markdown("<br>", unsafe_allow_html=True)
+process_button = st.button("✨ Hasilkan Konsep Foto Produk Otomatis")
+
+if process_button:
+    if uploaded_file is not None:
+        with st.spinner("⏳ Sedang memproses pengeditan foto produk, mohon tunggu..."):
+            time.sleep(3)
+        
+        st.success("✅ Berhasil! Foto selesai dibuat.")
+        st.markdown('<p class="box-header">Hasil Visual</p>', unsafe_allow_html=True)
+        st.image(uploaded_file, caption="Hasil Olah AI", use_container_width=True)
+        
+        col_a, col_b = st.columns(2)
+        with col_a:
+            st.button("⬇️ Unduh Foto")
+        with col_b:
+            st.button("📝 Buat Caption")
+    else:
+        st.warning("⚠️ Silakan unggah foto produk terlebih dahulu.")
+
+st.markdown("""
+<div class="closing-box">
+    <b>Skill hari ini, cuan untuk nanti. Terus bertumbuh!</b><br>
+    Semoga rezekinya halal, berkah, & jadi sedekah di akhirat. Aamiin. 🤲<br>
+    <b>Nhira Studio AI</b>
+    <hr style="border: none; border-top: 1px dashed #D9C3B0; margin: 10px 0;">
+    <span style="color: #D32F2F; font-size: 0.8rem; font-weight: 800;">
+    ⚠️ DILARANG MENJUAL/MENYEBARKAN LINK TANPA IZIN. HARAM! 🚫
+    </span>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
-
-# 4. Tombol Utama & Animasi Jam Pasir (Berada di Posisi Paling Bawah)
-if st.button("✨ Hasilkan 8 Konsep Foto Produk Otomatis", use_container_width=True):
-    if uploaded_file is not None:
-        with st.status("⏳ Nhira Studio AI sedang memproses foto...", expanded=True) as status:
-            st.write("Menganalisis bentuk dan pencahayaan produk...")
-            time.sleep(1.5)
-            st.write("Menerapkan gaya visual estetik...")
-            time.sleep(1.5)
-            st.write("Menyelesaikan 8 variasi foto...")
-            time.sleep(1)
-            status.update(label="🎉 Selesai! Foto berhasil diedit.", state="complete", expanded=False)
-        st.success("🎉 8 konsep foto produk Anda berhasil dibuat dan siap di-download!")
-    else:
-        st.error("⚠️ Silakan upload foto produk terlebih dahulu di Langkah 1!")
