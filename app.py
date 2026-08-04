@@ -9,8 +9,8 @@ st.markdown("""
 <style>
 .stApp { background-color: #FAF6F0; }
 .main-title { font-size: 2.2rem; font-weight: bold; color: #1E3F20; text-align: center; margin-bottom: 0px; }
-.sub-title { font-size: 1rem; color: #8C6D53; text-align: center; margin-bottom: 25px; }
-.greeting-box { background-color: #FFF2EE; padding: 15px 20px; border-radius: 12px; border: 1px solid #FFD1C7; color: #7A4F42; font-size: 0.95rem; text-align: center; margin-bottom: 20px; line-height: 1.5; }
+.sub-title { font-size: 1.0rem; color: #8C6D53; text-align: center; margin-bottom: 25px; }
+.greeting-box { background-color: #FFF2EE; padding: 15px 20px; border-radius: 12px; border: 1.5px solid #FFD1C7; color: #7A4F42; font-size: 0.95rem; text-align: center; margin-bottom: 25px; line-height: 1.5; }
 .card { background-color: #FFFFFF; padding: 20px; border-radius: 15px; border: 1.5px solid #F5D6CB; margin-bottom: 20px; }
 </style>
 """, unsafe_allow_html=True)
@@ -30,11 +30,11 @@ Eh tapi ingat, jangan keasyikan edit video sampai lupa jemuran di luar udah mate
 # 1. Langkah 1: Upload Foto Produk
 st.markdown('<div class="card">', unsafe_allow_html=True)
 st.markdown("### 1. Upload Foto Produk")
-uploaded_file = st.file_uploader("Format: JPG, PNG, WebP (Max. 10MB)", type=["jpg", "png", "jpeg", "webp"])
+uploaded_file = st.file_uploader("Format yang didukung: JPG, PNG, WebP", type=["jpg", "png", "jpeg", "webp"])
 
 if uploaded_file is not None:
     st.success("✅ Foto berhasil diunggah!")
-    st.image(uploaded_file, caption="Preview Foto Anda", width=200)
+    st.image(uploaded_file, caption="Preview Foto Anda", width=220)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -71,7 +71,6 @@ st.markdown('</div>', unsafe_allow_html=True)
 # 4. Tombol Utama & Animasi Jam Pasir (Berada di Posisi Paling Bawah)
 if st.button("✨ Hasilkan 8 Konsep Foto Produk Otomatis", use_container_width=True):
     if uploaded_file is not None:
-        # Animasi Jam Pasir Berjalan Selama Proses
         with st.status("⏳ Nhira Studio AI sedang memproses foto...", expanded=True) as status:
             st.write("Menganalisis bentuk dan pencahayaan produk...")
             time.sleep(1.5)
