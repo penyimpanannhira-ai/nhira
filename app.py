@@ -59,14 +59,12 @@ st.markdown("### A. FOTO PRODUK <span style='font-size:0.8rem; color:#8C6D53;'>(
 
 col_p1, col_p2 = st.columns([1, 1])
 with col_p1:
-    st.markdown("##### 1. Masukkan Link Foto Produk (URL)")
-    prod_url = st.text_input("Tempel link gambar online di sini (Contoh: https://...)", key="url_prod")
+    st.markdown("##### 1. Unggah Foto Produk")
+    prod_file = st.file_uploader("Format: PNG, JPG, atau WEBP", type=["jpg", "png", "jpeg", "webp"], key="prod")
     
-    if prod_url:
-        try:
-            st.image(prod_url, caption="Preview Foto Produk Anda", width=200)
-        except:
-            st.error("⚠️ Gagal memuat gambar dari link tersebut. Pastikan link langsung ke file gambar.")
+    if prod_file is not None:
+        st.success("✅ Foto produk berhasil diunggah!")
+        st.image(prod_file, caption="Preview Foto Anda", width=200)
     
     st.markdown("##### Rasio Aspek (Opsional)")
     prod_ratio = st.radio("Pilih rasio produk:", ["Default", "1:1", "3:4", "9:16", "16:9"], horizontal=True, key="r_prod")
@@ -99,13 +97,13 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 # Tombol Eksekusi Produk
 if st.button("✨ Hasilkan Foto Produk", use_container_width=True, key="btn_prod"):
-    if prod_url:
+    if prod_file is not None:
         with st.status("⏳ Memproses Foto Produk...", expanded=True) as status:
             time.sleep(1.5)
             status.update(label="🎉 Selesai!", state="complete", expanded=False)
         st.success("🎉 Foto produk berhasil diproses!")
     else:
-        st.error("⚠️ Silakan masukkan link foto produk terlebih dahulu di Bagian A nomor 1!")
+        st.error("⚠️ Silakan unggah foto produk terlebih dahulu di Bagian A nomor 1!")
 
 
 # ==========================================
@@ -116,15 +114,13 @@ st.markdown("### B. FOOD / KULINER <span style='font-size:0.8rem; color:#8C6D53;
 
 col_f1, col_f2 = st.columns([1, 1])
 with col_f1:
-    st.markdown("##### 1. Masukkan Link Foto Makanan (URL)")
-    food_url = st.text_input("Tempel link gambar makanan online di sini", key="url_food")
+    st.markdown("##### 1. Unggah Foto Makanan")
+    food_file = st.file_uploader("Format: PNG, JPG, atau WEBP", type=["jpg", "png", "jpeg", "webp"], key="food")
     
-    if food_url:
-        try:
-            st.image(food_url, caption="Preview Foto Makanan Anda", width=200)
-        except:
-            st.error("⚠️ Gagal memuat gambar dari link tersebut.")
-            
+    if food_file is not None:
+        st.success("✅ Foto makanan berhasil diunggah!")
+        st.image(food_file, caption="Preview Foto Makanan Anda", width=200)
+        
     st.markdown("##### Rasio Aspek (Opsional)")
     food_ratio = st.radio("Pilih rasio makanan:", ["Default", "1:1", "3:4", "9:16", "16:9"], horizontal=True, key="r_food")
     
@@ -156,13 +152,13 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 # Tombol Eksekusi Food
 if st.button("✨ Hasilkan Foto Food", use_container_width=True, key="btn_food"):
-    if food_url:
+    if food_file is not None:
         with st.status("⏳ Memproses Foto Kuliner...", expanded=True) as status:
             time.sleep(1.5)
             status.update(label="🎉 Selesai!", state="complete", expanded=False)
         st.success("🎉 Foto kuliner berhasil diproses!")
     else:
-        st.error("⚠️ Silakan masukkan link foto makanan terlebih dahulu di Bagian B nomor 1!")
+        st.error("⚠️ Silakan unggah foto makanan terlebih dahulu di Bagian B nomor 1!")
 
 
 # ==========================================
@@ -172,7 +168,7 @@ st.markdown('<div class="section-box">', unsafe_allow_html=True)
 st.markdown("### C. HASIL VISUAL", unsafe_allow_html=True)
 st.markdown("<p style='font-size:0.9rem; color:#8C6D53;'>Hasil & konsep visual siap digunakan.</p>", unsafe_allow_html=True)
 
-st.info("🖼️ Hasil akan muncul di sini. Masukkan link gambar dan pilih gaya, lalu klik tombol 'Hasilkan' untuk memulai.")
+st.info("🖼️ Hasil akan muncul di sini. Unggah gambar dan pilih gaya, lalu klik tombol 'Hasilkan' untuk memulai.")
 st.markdown("</div>", unsafe_allow_html=True)
 
 
